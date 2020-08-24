@@ -1,16 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import SearchBar from './SearchBar';
+import SearchBar from "./SearchBar";
+import youtube from "../API/youtubeAPI";
 
-class App extends React.Component{
+class App extends React.Component {
+  onTermSubmit = async (term) => {
+    var response=await youtube.get("/search", {
+      q: term,
+    });
 
-    render(){
-        return (
-            <div className="ui container">
-                <SearchBar />
-            </div>
-        );
-    }
+    console.log(response);
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+      </div>
+    );
+  }
 }
 
 export default App;
